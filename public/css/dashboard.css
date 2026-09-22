@@ -1,0 +1,482 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+    background: white;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 28px;
+
+    gap: 35px;
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.brand {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    text-decoration: none;
+    color: black;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    min-width: 330px;
+}
+
+
+.brand-icon {
+    width: 44px;
+    height: 52px;
+
+    background: #2868ed;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.small-laptop {
+    width: 23px;
+    height: 19px;
+
+    border: 2px solid white;
+
+    border-radius: 3px;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-form {
+    flex: 1;
+
+    display: flex;
+
+    height: 42px;
+
+    max-width: 650px;
+
+    border: 2px solid #e1e4e9;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+
+.search-form input {
+    flex: 1;
+
+    border: none;
+    outline: none;
+
+    padding: 0 25px;
+
+    font-size: 15px;
+}
+
+
+.search-form button {
+    width: 130px;
+
+    border: none;
+
+    background: #2868ed;
+    color: white;
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+
+.search-form button:hover {
+    background: #1956cf;
+}
+
+
+/* =========================
+   USER
+========================= */
+
+.user-area {
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+
+    gap: 120px;
+}
+
+
+.avatar {
+    width: 56px;
+    height: 56px;
+
+    border: 2px solid #2868ed;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 32px;
+}
+
+
+.logout {
+    border: none;
+
+    background: transparent;
+
+    font-size: 19px;
+
+    cursor: pointer;
+}
+
+
+.logout:hover {
+    color: #2868ed;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    height: 35px;
+
+    background: #2868ed;
+
+    display: flex;
+    align-items: center;
+
+    padding-left: 72px;
+}
+
+
+.navbar a {
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 15px;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+    padding-top: 25px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    width: calc(100% - 96px);
+    max-width: 1450px;
+
+    /* sebelumnya 675px */
+    height: 475px;
+
+    margin: auto;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: #dce7ff;
+
+    border: 1px solid #d9dde5;
+
+    border-radius: 28px;
+}
+
+
+.hero-content {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =========================
+   HERO TEXT
+========================= */
+
+.hero-text {
+    width: 50%;
+
+    padding-left: 18%;
+}
+
+
+.hero-text h1 {
+    font-size: 46px;
+
+    line-height: 1.15;
+
+    font-weight: 500;
+}
+
+
+.hero-text p {
+    margin-top: 5px;
+
+    font-size: 16px;
+}
+
+
+.buy-button {
+    display: inline-block;
+
+    /* sebelumnya 130px */
+    margin-top: 110px;
+
+    padding: 18px 40px;
+
+    background: #2868ed;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    border-radius: 35px;
+}
+
+
+.buy-button:hover {
+    background: #1956cf;
+}
+
+
+/* =========================
+   LAPTOP
+========================= */
+
+.hero-image {
+    width: 50%;
+
+    display: flex;
+    justify-content: center;
+
+    position: relative;
+
+    z-index: 5;
+}
+
+
+.hero-image img {
+    /* sebelumnya 540px */
+    width: 480px;
+
+    max-width: 90%;
+}
+
+
+/* =========================
+   CIRCLES
+========================= */
+
+.circle {
+    position: absolute;
+
+    border-radius: 50%;
+}
+
+
+.circle-one {
+    width: 500px;
+    height: 500px;
+
+    right: -130px;
+    top: -180px;
+
+    background: linear-gradient(
+        135deg,
+        #1762ee,
+        #aabce0
+    );
+}
+
+
+.circle-two {
+    width: 290px;
+    height: 290px;
+
+    right: 330px;
+    top: 220px;
+
+    background: linear-gradient(
+        135deg,
+        #2868ed,
+        #d1ddf5
+    );
+}
+
+
+.circle-three {
+    width: 540px;
+    height: 540px;
+
+    right: -110px;
+    bottom: -370px;
+
+    background: linear-gradient(
+        135deg,
+        #1762ee,
+        #dce7ff
+    );
+}
+
+
+/* =========================
+   FLASH SALE
+========================= */
+
+.flash-sale {
+    text-align: center;
+
+    /* sebelumnya 50px */
+    padding: 40px 20px;
+}
+
+
+.flash-sale h2 {
+    font-size: 36px;
+
+    font-weight: 400;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1100px) {
+
+    .brand {
+        min-width: auto;
+    }
+
+    .brand span {
+        display: none;
+    }
+
+    .user-area {
+        gap: 30px;
+    }
+
+    .hero-text {
+        padding-left: 8%;
+    }
+}
+
+
+@media (max-width: 750px) {
+
+    .header {
+        height: auto;
+
+        padding: 15px;
+
+        flex-wrap: wrap;
+    }
+
+    .search-form {
+        order: 3;
+
+        width: 100%;
+        flex-basis: 100%;
+    }
+
+    .logout {
+        font-size: 18px;
+    }
+
+    .avatar {
+        width: 50px;
+        height: 50px;
+
+        font-size: 25px;
+    }
+
+    .hero {
+        width: 94%;
+
+        height: auto;
+        min-height: 600px;
+    }
+
+    .hero-content {
+        flex-direction: column;
+
+        padding: 60px 20px;
+    }
+
+    .hero-text {
+        width: 100%;
+
+        padding: 0;
+
+        text-align: center;
+    }
+
+    .hero-text h1 {
+        font-size: 40px;
+    }
+
+    .buy-button {
+        margin-top: 50px;
+    }
+
+    .hero-image {
+        width: 100%;
+
+        margin-top: 50px;
+    }
+}

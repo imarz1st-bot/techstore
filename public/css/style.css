@@ -1,0 +1,313 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: white;
+    color: #111;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    height: 70px;
+    background: white;
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    text-decoration: none;
+    font-size: 27px;
+    font-weight: bold;
+    color: #2868ed;
+}
+
+.logo-icon {
+    background: #2868ed;
+    color: white;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: #2868ed;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 620px;
+
+    background: #dce7ff;
+
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: relative;
+    z-index: 2;
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+.hero-text {
+    width: 50%;
+}
+
+.hero-text h1 {
+    font-size: 55px;
+    line-height: 1.05;
+
+    font-weight: 500;
+
+    margin-bottom: 15px;
+}
+
+.hero-text p {
+    font-size: 17px;
+    margin-bottom: 150px;
+}
+
+.buy-button {
+    display: inline-block;
+
+    padding: 18px 42px;
+
+    background: #2868ed;
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 35px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.buy-button:hover {
+    background: #174ec4;
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   LAPTOP
+========================= */
+
+.hero-image {
+    width: 50%;
+
+    display: flex;
+    justify-content: center;
+
+    position: relative;
+    z-index: 3;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 560px;
+}
+
+
+/* =========================
+   BACKGROUND CIRCLES
+========================= */
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.circle-top {
+    width: 520px;
+    height: 520px;
+
+    right: -130px;
+    top: -210px;
+
+    background: linear-gradient(
+        135deg,
+        #1762ee,
+        #b9c9e7
+    );
+}
+
+.circle-middle {
+    width: 330px;
+    height: 330px;
+
+    right: 330px;
+    top: 190px;
+
+    background: linear-gradient(
+        135deg,
+        #2467ed,
+        #cbd9f5
+    );
+
+    box-shadow: 0 0 25px rgba(39, 103, 237, 0.2);
+}
+
+.circle-bottom {
+    width: 560px;
+    height: 560px;
+
+    right: -80px;
+    bottom: -360px;
+
+    background: linear-gradient(
+        135deg,
+        #1762ee,
+        #d9e4f8
+    );
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 800px) {
+
+    nav {
+        display: none;
+    }
+
+    .hero {
+        padding: 60px 0;
+    }
+
+    .hero-content {
+        flex-direction: column;
+    }
+
+    .hero-text,
+    .hero-image {
+        width: 100%;
+    }
+
+    .hero-text {
+        text-align: center;
+    }
+
+    .hero-text h1 {
+        font-size: 42px;
+    }
+
+    .hero-text p {
+        margin-bottom: 40px;
+    }
+
+    .hero-image {
+        margin-top: 60px;
+    }
+
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    text-decoration: none;
+    color: #161d2d;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    margin-bottom: 42px;
+}
+
+.logo-icon {
+    width: 45px;
+    height: 52px;
+
+    background: #2868ed;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.laptop-icon {
+    width: 29px;
+    height: 23px;
+
+    border: 2px solid white;
+    border-radius: 3px;
+
+    position: relative;
+}
+
+.laptop-icon::after {
+    content: "";
+
+    position: absolute;
+
+    left: -2px;
+    bottom: -5px;
+
+    width: 29px;
+
+    border-bottom: 2px solid white;
+}

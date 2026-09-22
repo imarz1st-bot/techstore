@@ -1,0 +1,450 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #161d2d;
+    background: #ffffff;
+}
+
+
+/* =========================
+   HALAMAN
+========================= */
+
+.register-page {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+}
+
+
+/* =========================
+   REGISTER CARD
+========================= */
+
+.register-card {
+    width: 575px;
+    min-height: 685px;
+
+    margin-left: 12%;
+
+    padding: 90px 60px 50px;
+
+    border: 1px solid #dce1e8;
+    border-radius: 22px;
+
+    background: white;
+}
+
+
+/* =========================
+   BRAND
+========================= */
+
+.brand {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    text-decoration: none;
+
+    color: #161d2d;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    margin-bottom: 42px;
+}
+
+
+.logo-icon {
+    width: 55px;
+    height: 62px;
+
+    background: #2868ed;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.laptop-icon {
+    width: 29px;
+    height: 23px;
+
+    border: 2px solid white;
+    border-radius: 3px;
+
+    position: relative;
+}
+
+
+.laptop-icon::after {
+    content: "";
+
+    position: absolute;
+
+    left: -2px;
+    bottom: -5px;
+
+    width: 29px;
+
+    border-bottom: 2px solid white;
+}
+
+
+/* =========================
+   JUDUL
+========================= */
+
+.register-card h1 {
+    font-size: 22px;
+
+    margin-bottom: 56px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-group {
+    margin-bottom: 3px;
+}
+
+
+.form-group label {
+    display: block;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    margin-bottom: 11px;
+}
+
+
+.input-box {
+    height: 63px;
+
+    display: flex;
+    align-items: center;
+
+    border: 1px solid #dce1e8;
+    border-radius: 13px;
+
+    background: #fafbfc;
+
+    margin-bottom: 2px;
+}
+
+
+.input-box:focus-within {
+    border-color: #2868ed;
+}
+
+
+.input-box input {
+    flex: 1;
+
+    height: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    padding: 0 15px;
+
+    font-size: 14px;
+}
+
+
+.input-box input::placeholder {
+    color: #9ba6b8;
+}
+
+
+/* =========================
+   ICON KIRI
+========================= */
+
+.search-icon {
+    width: 15px;
+    height: 15px;
+
+    border: 2px solid #9ba6b8;
+    border-radius: 50%;
+
+    margin-left: 20px;
+
+    position: relative;
+}
+
+
+.search-icon::after {
+    content: "";
+
+    position: absolute;
+
+    width: 7px;
+    height: 2px;
+
+    background: #9ba6b8;
+
+    right: -5px;
+    bottom: -3px;
+
+    transform: rotate(45deg);
+}
+
+
+/* =========================
+   ICON PASSWORD
+========================= */
+
+.eye-button {
+    border: none;
+    background: transparent;
+
+    margin-right: 18px;
+
+    color: #9ba6b8;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   SUDAH PUNYA AKUN
+========================= */
+
+.login-link {
+    text-align: right;
+
+    margin-top: 8px;
+    margin-bottom: 17px;
+}
+
+
+.login-link a {
+    color: #818896;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    text-decoration: none;
+}
+
+
+.login-link a:hover {
+    color: #2868ed;
+    text-decoration: underline;
+}
+
+
+/* =========================
+   REGISTER BUTTON
+========================= */
+
+.register-button {
+    width: 100%;
+    height: 63px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #2868ed;
+    color: white;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.register-button:hover {
+    background: #1752ca;
+}
+
+
+/* =========================
+   ILUSTRASI
+========================= */
+
+.illustration {
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+}
+
+
+/* LAPTOP */
+
+.laptop {
+    width: 280px;
+    height: 170px;
+
+    position: relative;
+}
+
+
+.screen {
+    width: 250px;
+    height: 155px;
+
+    margin: auto;
+
+    border: 2px solid #e0e5ec;
+    border-radius: 12px 12px 0 0;
+
+    position: relative;
+}
+
+
+.screen::after {
+    content: "";
+
+    position: absolute;
+
+    top: 13px;
+    left: 13px;
+
+    width: 220px;
+    height: 135px;
+
+    background: #e3edff;
+
+    border-radius: 7px 7px 0 0;
+}
+
+
+.keyboard {
+    width: 305px;
+    height: 20px;
+
+    position: absolute;
+
+    left: -12px;
+    bottom: 0;
+
+    border: 2px solid #e0e5ec;
+    border-radius: 7px;
+
+    background: white;
+}
+
+
+/* =========================
+   TANAMAN
+========================= */
+
+.plant {
+    width: 70px;
+    height: 140px;
+
+    position: relative;
+
+    margin-left: 20px;
+    margin-top: 40px;
+}
+
+
+.pot {
+    width: 37px;
+    height: 42px;
+
+    position: absolute;
+
+    bottom: 0;
+    left: 17px;
+
+    background: #dcebdc;
+
+    border-radius: 5px;
+}
+
+
+.leaf {
+    width: 35px;
+    height: 75px;
+
+    position: absolute;
+
+    top: 0;
+
+    border: 3px solid #0ba34a;
+
+    border-radius: 50%;
+
+    background: white;
+}
+
+
+.leaf-left {
+    left: 8px;
+
+    transform: rotate(-14deg);
+}
+
+
+.leaf-right {
+    right: 8px;
+
+    transform: rotate(14deg);
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+
+    .register-card {
+        margin-left: 5%;
+    }
+
+    .illustration {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .register-page {
+        padding: 20px;
+    }
+
+    .register-card {
+        width: 100%;
+        min-height: auto;
+
+        margin: 0;
+
+        padding: 50px 30px;
+    }
+
+}
+.error-message {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 10px;
+}
