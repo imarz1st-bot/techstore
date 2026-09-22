@@ -40,7 +40,7 @@
                 <span>Produk</span>
             </a>
 
-            <a href="#" class="menu">
+            <a href="{{ route('admin.orders.index') }}" class="menu">
                 <i class="bi bi-cart3"></i>
                 <span>Pesanan</span>
             </a>
