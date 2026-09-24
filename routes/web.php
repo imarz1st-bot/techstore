@@ -5,7 +5,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\OrderController;
-
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\SettingController;
 
 // =============================
 // LANDING PAGE
@@ -81,5 +83,32 @@ Route::prefix('admin')
         
         Route::get('/orders', [OrderController::class, 'index'])
             ->name('orders.index');
-            
+
+        Route::get('/orders/{order}', [OrderController::class, 'show'])
+            ->name('orders.show');
+
+        Route::patch('/orders/{order}/status', [OrderController::class, 'updateStatus'])
+            ->name('orders.update-status');
+
+        Route::get('/customers', [CustomerController::class, 'index'])
+            ->name('customers.index');
+
+        Route::patch(
+            '/customers/{customer}/status',
+            [CustomerController::class, 'toggleStatus']
+        )->name('customers.toggle-status');
+
+        Route::delete(
+            '/customers/{customer}',
+            [CustomerController::class, 'destroy']
+        )->name('customers.destroy');
+        
+        Route::get('/reports', [ReportController::class, 'index'])
+            ->name('reports.index');
+
+        Route::get('/settings', [SettingController::class, 'index'])
+            ->name('settings.index');
+
+        Route::put('/settings', [SettingController::class, 'update'])
+            ->name('settings.update');
     });

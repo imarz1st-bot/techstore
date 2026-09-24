@@ -45,17 +45,17 @@
                 <span>Pesanan</span>
             </a>
 
-            <a href="#" class="menu">
+            <a href="{{ route('admin.customers.index') }}" class="menu">
                 <i class="bi bi-people"></i>
                 <span>Pelanggan</span>
             </a>
 
-            <a href="#" class="menu">
+           <a href="{{ route('admin.reports.index') }}" class="menu">
                 <i class="bi bi-bar-chart-fill"></i>
                 <span>Laporan</span>
             </a>
 
-            <a href="#" class="menu">
+            <a href="{{ route('admin.settings.index') }}" class="menu">
                 <i class="bi bi-gear"></i>
                 <span>Pengaturan</span>
             </a>
@@ -252,21 +252,17 @@
 
                             <td>
                                 <div class="order-actions">
-                                    <button
-                                        type="button"
-                                        class="order-action view-action"
-                                        title="Lihat detail"
-                                        onclick="alert('Halaman detail pesanan dibuat pada tahap selanjutnya.')">
+                                    <a href="{{ route('admin.orders.show', $order) }}"
+                                    class="order-action view-action"
+                                    title="Lihat detail">
                                         <i class="bi bi-eye"></i>
-                                    </button>
+                                    </a>
 
-                                    <button
-                                        type="button"
-                                        class="order-action edit-action"
-                                        title="Ubah status"
-                                        onclick="alert('Perubahan status dibuat bersama halaman detail pesanan.')">
+                                    <a href="{{ route('admin.orders.show', $order) }}#ubah-status"
+                                    class="order-action edit-action"
+                                    title="Ubah status">
                                         <i class="bi bi-pencil"></i>
-                                    </button>
+                                    </a>
                                 </div>
                             </td>
                         </tr>

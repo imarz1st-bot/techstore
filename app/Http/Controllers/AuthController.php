@@ -33,6 +33,19 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
+            if (Auth::user()->status === 'nonaktif') {
+                Auth::logout();
+
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+
+                return back()
+                    ->withErrors([
+                        'email' => 'Akun Anda sedang dinonaktifkan.',
+                    ])
+                    ->onlyInput('email');
+            }
+
             if (Auth::user()->role === 'admin') {
                 return redirect()->route('admin.dashboard');
             }
@@ -88,10 +101,9 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-
-            // Password TIDAK disimpan sebagai teks biasa
             'password' => Hash::make($request->password),
             'role' => 'user',
+            'status' => 'aktif',
         ]);
 
 

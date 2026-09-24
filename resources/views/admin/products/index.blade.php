@@ -44,17 +44,17 @@
                 <span>Pesanan</span>
             </a>
 
-            <a href="#" class="menu">
+           <a href="{{ route('admin.customers.index') }}" class="menu">
                 <i class="bi bi-people"></i>
                 <span>Pelanggan</span>
             </a>
 
-            <a href="#" class="menu">
+           <a href="{{ route('admin.reports.index') }}" class="menu">
                 <i class="bi bi-bar-chart-fill"></i>
                 <span>Laporan</span>
             </a>
 
-            <a href="#" class="menu">
+            <a href="{{ route('admin.settings.index') }}" class="menu">
                 <i class="bi bi-gear"></i>
                 <span>Pengaturan</span>
             </a>

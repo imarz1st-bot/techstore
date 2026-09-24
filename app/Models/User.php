@@ -13,8 +13,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[Fillable([
     'name',
     'email',
+    'no_hp',
     'password',
-    'role'
+    'role',
+    'status'
 ])]
 #[Hidden([
     'password',

@@ -53,4 +53,34 @@ class OrderController extends Controller
             'tanggalAkhir'
         ));
     }
+    public function show(Order $order)
+    {
+        $order->load([
+            'user',
+            'items.product'
+        ]);
+
+        return view('admin.orders.show', compact('order'));
+    }
+
+    public function updateStatus(Request $request, Order $order)
+    {
+        $validated = $request->validate([
+            'status' => [
+                'required',
+                'in:menunggu,diproses,dikirim,selesai,dibatalkan'
+            ],
+        ], [
+            'status.required' => 'Status pesanan wajib dipilih.',
+            'status.in' => 'Status pesanan tidak valid.',
+        ]);
+
+        $order->update([
+            'status' => $validated['status'],
+        ]);
+
+        return redirect()
+            ->route('admin.orders.show', $order)
+            ->with('success', 'Status pesanan berhasil diperbarui.');
+    }
 }
