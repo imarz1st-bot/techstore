@@ -47,9 +47,21 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('dashboard-user');
     })->name('dashboard');
 
+    Route::get('/product/detail', function () {
+        return view('product-detail');
+    })->name('product.detail');
+
+    Route::get('/order', function () {
+        return view('order');
+    })->name('order');
+
+    // 👇 TAMBAHAN ROUTE HALAMAN INVOICE DI SINI
+    Route::get('/invoice', function () {
+        return view('invoice');
+    })->name('invoice');
 
     Route::post('/logout', [AuthController::class, 'logout'])
         ->name('logout');
@@ -64,7 +76,7 @@ Route::prefix('admin')
             ->name('dashboard');
 
         Route::get('/products', [ProductController::class, 'index'])
-        ->name('products.index');
+            ->name('products.index');
 
         Route::get('/products/create', [ProductController::class, 'create'])
             ->name('products.create');
