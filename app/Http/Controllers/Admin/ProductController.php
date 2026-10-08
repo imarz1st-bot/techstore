@@ -37,7 +37,10 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
             'nama' => ['required', 'string', 'max:255'],
-            'kategori' => ['required', 'string', 'max:100'],
+            'kategori' => [
+                'required',
+                'in:laptop,mouse,charger,monitor,aksesoris',
+            ],
             'harga' => ['required', 'numeric', 'min:0'],
             'stok' => ['required', 'integer', 'min:0'],
             'deskripsi' => ['nullable', 'string'],

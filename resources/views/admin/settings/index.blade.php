@@ -106,28 +106,30 @@
             <p>Atur informasi toko dan preferensi sistem</p>
         </div>
 
+        @php
+            $activeTab = request('tab', 'store');
+
+            if (!in_array($activeTab, ['store', 'shipping', 'account'], true)) {
+                $activeTab = 'store';
+            }
+
+            $tabs = [
+                'store' => 'Informasi Toko',
+                'shipping' => 'Ongkos Kirim',
+                'account' => 'Akun Admin',
+            ];
+        @endphp
+
         <div class="settings-tabs">
-            <button type="button" class="tab-button active">
-                Informasi Toko
-            </button>
-
-            <button type="button"
-                    class="tab-button"
-                    onclick="alert('Pengaturan pembayaran dibuat setelah sistem checkout.')">
-                Pembayaran
-            </button>
-
-            <button type="button"
-                    class="tab-button"
-                    onclick="alert('Pengaturan pengiriman dibuat setelah sistem checkout.')">
-                Pengiriman
-            </button>
-
-            <button type="button"
-                    class="tab-button"
-                    onclick="alert('Pengaturan akun admin akan dibuat pada pengembangan berikutnya.')">
-                Akun Admin
-            </button>
+            @foreach($tabs as $key => $label)
+                <a
+                    href="{{ route('admin.settings.index', ['tab' => $key]) }}"
+                    class="tab-button {{ $activeTab === $key ? 'active' : '' }}"
+                    style="text-decoration: none;"
+                >
+                    {{ $label }}
+                </a>
+            @endforeach
         </div>
 
         @if(session('success'))
@@ -137,6 +139,7 @@
             </div>
         @endif
 
+        @if($activeTab === 'store')
         <form
             action="{{ route('admin.settings.update') }}"
             method="POST"
@@ -283,6 +286,186 @@
                 Simpan Perubahan
             </button>
         </form>
+        @endif
+            @if($activeTab === 'shipping')
+        <form
+            class="settings-form shipping-settings-form"
+            action="{{ route('admin.settings.shipping.update') }}"
+            method="POST"
+        >
+            @csrf
+            @method('PUT')
+
+            @if($errors->any())
+                <div role="alert"
+                    style="padding: 12px; margin-bottom: 16px;
+                            background: #fff1f2; color: #b91c1c;
+                            border-radius: 8px;">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <article class="settings-card">
+                <h2>Ongkos Kirim</h2>
+
+                <div class="setting-field">
+                    <label for="shipping-type">Jenis Ongkir</label>
+
+                    <select
+                        id="shipping-type"
+                        name="shipping_type"
+                        required
+                        style="width: 100%; padding: 12px;"
+                    >
+                        <option
+                            value="free"
+                            @selected(old('shipping_type', $setting->shipping_type) === 'free')
+                        >
+                            Gratis Ongkir
+                        </option>
+
+                        <option
+                            value="flat"
+                            @selected(old('shipping_type', $setting->shipping_type) === 'flat')
+                        >
+                            Ongkir Tetap
+                        </option>
+                    </select>
+                </div>
+
+                <div class="setting-field">
+                    <label for="shipping-cost">Biaya Pengiriman (Rp)</label>
+
+                    <input
+                        id="shipping-cost"
+                        name="shipping_cost"
+                        type="number"
+                        min="0"
+                        max="10000000"
+                        step="1"
+                        value="{{ old('shipping_cost', $setting->shipping_cost) }}"
+                    >
+
+                    <small>
+                        Contoh: 15000. Biaya dikenakan satu kali per pesanan.
+                        Jika memilih Gratis Ongkir, biaya ini diabaikan.
+                    </small>
+                </div>
+            </article>
+
+            <div class="shipping-settings-actions">
+                <button type="submit" class="save-settings-button">
+                    Simpan Ongkos Kirim
+                </button>
+            </div>
+        </form>
+    @endif
+        @if($activeTab === 'account')
+        <form
+            action="{{ route('admin.settings.account.update') }}"
+            method="POST"
+            class="settings-form"
+        >
+            @csrf
+            @method('PUT')
+
+            @if($errors->any())
+                <div role="alert"
+                    style="padding: 12px; margin-bottom: 16px;
+                            background: #fff1f2; color: #b91c1c;
+                            border-radius: 8px;">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <article class="settings-card">
+                <h2>Akun Admin</h2>
+                <p>Ubah informasi akun admin yang sedang login.</p>
+
+                <div class="setting-field">
+                    <label for="admin-name">Nama Admin</label>
+
+                    <input
+                        id="admin-name"
+                        name="name"
+                        type="text"
+                        value="{{ old('name', auth()->user()->name) }}"
+                        maxlength="255"
+                        autocomplete="name"
+                        required
+                    >
+                </div>
+
+                <div class="setting-field">
+                    <label for="admin-email">Email Login</label>
+
+                    <input
+                        id="admin-email"
+                        name="admin_email"
+                        type="email"
+                        value="{{ old('admin_email', auth()->user()->email) }}"
+                        maxlength="255"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="setting-field">
+                    <label for="current-password">Password Saat Ini</label>
+
+                    <input
+                        id="current-password"
+                        name="current_password"
+                        type="password"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+
+                <div class="setting-field">
+                    <label for="new-password">Password Baru</label>
+
+                    <input
+                        id="new-password"
+                        name="password"
+                        type="password"
+                        minlength="8"
+                        autocomplete="new-password"
+                    >
+
+                    <small>
+                        Kosongkan jika tidak ingin mengganti password.
+                    </small>
+                </div>
+
+                <div class="setting-field">
+                    <label for="password-confirmation">
+                        Konfirmasi Password Baru
+                    </label>
+
+                    <input
+                        id="password-confirmation"
+                        name="password_confirmation"
+                        type="password"
+                        minlength="8"
+                        autocomplete="new-password"
+                    >
+                </div>
+            </article>
+
+            <button type="submit" class="save-settings-button">
+                Simpan Akun Admin
+            </button>
+        </form>
+    @endif
     </section>
 </main>
 
@@ -291,7 +474,7 @@
     const previewImage = document.getElementById('previewImage');
     const logoPlaceholder = document.getElementById('logoPlaceholder');
 
-    inputLogo.addEventListener('change', function () {
+    inputLogo?.addEventListener('change', function () {
         const file = this.files[0];
 
         if (!file || !file.type.startsWith('image/')) {

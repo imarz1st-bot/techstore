@@ -129,22 +129,15 @@
                         <div class="form-group">
                             <label for="kategori">Kategori <b>*</b></label>
 
-                            <select id="kategori" name="kategori">
+                            <select id="kategori" name="kategori" required>
                                 <option value="">Pilih kategori</option>
 
-                                @foreach([
-                                    'Laptop',
-                                    'Gaming',
-                                    'MacBook',
-                                    'Aksesoris'
-                                ] as $kategori)
+                                @foreach(['laptop', 'mouse', 'charger', 'monitor', 'aksesoris'] as $kategori)
                                     <option
                                         value="{{ $kategori }}"
-                                        @selected(
-                                            old('kategori', $product->kategori)
-                                            === $kategori
-                                        )>
-                                        {{ $kategori }}
+                                        @selected(old('kategori', strtolower($product->kategori)) === $kategori)
+                                    >
+                                        {{ ucfirst($kategori) }}
                                     </option>
                                 @endforeach
                             </select>

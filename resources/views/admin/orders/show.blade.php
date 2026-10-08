@@ -293,6 +293,18 @@
         <article class="detail-card status-section no-print"
                  id="ubah-status">
             <h2>Ubah Status Pesanan</h2>
+                        @if($errors->any())
+                <div role="alert"
+                    style="padding: 12px; margin-bottom: 16px;
+                            background: #fff1f2; color: #b91c1c;
+                            border-radius: 8px;">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
             <form
                 action="{{ route('admin.orders.update-status', $order) }}"

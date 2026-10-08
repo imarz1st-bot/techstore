@@ -23,6 +23,7 @@
                 id="product-search"
                 type="search"
                 name="search"
+                value="{{ $search }}"
                 placeholder="Cari laptop dan aksesoris..."
                 autocomplete="off"
             >
@@ -30,6 +31,10 @@
         </form>
 
         <div class="account-actions">
+            <a href="{{ route('orders.index') }}"
+            style="text-decoration: none; color: #2563eb; font-weight: 600;">
+                Pesanan Saya
+            </a>
             <div class="account-profile">
                 <span class="account-profile__avatar" aria-hidden="true">
                     {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
@@ -45,6 +50,14 @@
     </header>
 
     <main class="storefront">
+        @if(session('success'))
+            <div role="status"
+                style="padding: 14px; margin-bottom: 20px;
+                        background: #dcfce7; color: #166534;
+                        border-radius: 8px;">
+                {{ session('success') }}
+            </div>
+        @endif
         <section class="hero-section" aria-labelledby="hero-title">
             <div class="hero-section__content">
                 <p class="hero-section__eyebrow">Teknologi untuk produktivitas tanpa batas</p>
@@ -53,9 +66,8 @@
                     Ringan dibawa, bertenaga untuk setiap ide. Temukan laptop yang siap
                     menemani pekerjaan dan hiburan Anda.
                 </p>
-                <a class="hero-section__button" href="/product/detail">Buy Now</a>
+                <a class="hero-section__button" href="#product-grid">Lihat Produk</a>
             </div>
-
             <div class="hero-section__visual">
                 <img
                     class="hero-section__image"
@@ -65,65 +77,111 @@
             </div>
         </section>
 
-        <section class="flash-sale-section" id="flash-sale" aria-labelledby="flash-sale-title">
-            <div class="flash-sale-section__heading">
-                <div>
-                    <p class="flash-sale-section__eyebrow">Penawaran terbatas</p>
-                    <h2 class="flash-sale-section__title" id="flash-sale-title">Flash Sale</h2>
+        <div id="product-grid">
+            @if($search !== '')
+                <div class="category-search-summary">
+                    <p>Hasil pencarian: <strong>{{ $search }}</strong></p>
+
+                    <a href="{{ route('dashboard') }}">
+                        Tampilkan semua produk
+                    </a>
                 </div>
-                <a class="flash-sale-section__link" href="#product-grid">Lihat produk</a>
-            </div>
+            @endif
 
-            <div class="product-grid" id="product-grid">
-                <a class="product-card" href="/product/detail">
-                    <div class="product-card__image-wrap">
-                        <span class="product-card__badge">-15%</span>
-                        <img class="product-card__image" src="{{ asset('images/laptop.png') }}" alt="Ultrabook" loading="lazy">
-                    </div>
-                    <div class="product-card__details">
-                        <p class="product-card__category">Ultrabook</p>
-                        <h3 class="product-card__name">Performance Ultrabook</h3>
-                        <p class="product-card__price">Rp 12.750.000</p>
-                    </div>
-                </a>
+            @forelse($categories as $categoryKey => $categoryName)
+                @php
+                    $categoryProducts = $productsByCategory->get(
+                        $categoryKey,
+                        collect()
+                    );
+                @endphp
 
-                <a class="product-card" href="/product/detail">
-                    <div class="product-card__image-wrap">
-                        <span class="product-card__badge">-10%</span>
-                        <img class="product-card__image" src="{{ asset('images/laptop.png') }}" alt="Laptop produktivitas" loading="lazy">
-                    </div>
-                    <div class="product-card__details">
-                        <p class="product-card__category">Laptop</p>
-                        <h3 class="product-card__name">Everyday Pro 14</h3>
-                        <p class="product-card__price">Rp 9.499.000</p>
-                    </div>
-                </a>
+                @if($categoryProducts->isNotEmpty())
+                    <section
+                        class="flash-sale-section category-section"
+                        id="category-{{ $categoryKey }}"
+                        aria-labelledby="title-{{ $categoryKey }}"
+                    >
+                        <div class="flash-sale-section__heading">
+                            <div>
+                                <p class="flash-sale-section__eyebrow">
+                                    Koleksi TechStore
+                                </p>
 
-                <a class="product-card" href="/product/detail">
-                    <div class="product-card__image-wrap">
-                        <span class="product-card__badge">-20%</span>
-                        <img class="product-card__image" src="{{ asset('images/laptop.png') }}" alt="Laptop kreator" loading="lazy">
-                    </div>
-                    <div class="product-card__details">
-                        <p class="product-card__category">Creator Series</p>
-                        <h3 class="product-card__name">CreatorBook Studio</h3>
-                        <p class="product-card__price">Rp 15.999.000</p>
-                    </div>
-                </a>
+                                <h2
+                                    class="flash-sale-section__title"
+                                    id="title-{{ $categoryKey }}"
+                                >
+                                    {{ $categoryName }}
+                                </h2>
+                            </div>
 
-                <a class="product-card" href="/product/detail">
-                    <div class="product-card__image-wrap">
-                        <span class="product-card__badge">-12%</span>
-                        <img class="product-card__image" src="{{ asset('images/laptop.png') }}" alt="Laptop gaming" loading="lazy">
-                    </div>
-                    <div class="product-card__details">
-                        <p class="product-card__category">Gaming</p>
-                        <h3 class="product-card__name">TechStore GameForce</h3>
-                        <p class="product-card__price">Rp 18.250.000</p>
-                    </div>
-                </a>
-            </div>
-        </section>
+                            <span class="category-product-count">
+                                {{ $categoryProducts->count() }} produk
+                            </span>
+                        </div>
+
+                        <div class="product-grid category-product-grid">
+                            @foreach($categoryProducts as $product)
+                                <a
+                                    class="product-card"
+                                    href="{{ route('product.detail', ['id' => $product->id]) }}"
+                                >
+                                    <div class="product-card__image-wrap">
+                                        @if($product->stok <= 0)
+                                            <span class="product-card__badge">
+                                                Stok habis
+                                            </span>
+                                        @endif
+
+                                        @if($product->gambar)
+                                            <img
+                                                class="product-card__image"
+                                                src="{{ asset('storage/' . $product->gambar) }}"
+                                                alt="{{ $product->nama }}"
+                                                loading="lazy"
+                                            >
+                                        @else
+                                            <div class="product-image-placeholder">
+                                                Gambar belum tersedia
+                                            </div>
+                                        @endif
+                                    </div>
+
+                                    <div class="product-card__details">
+                                        <p class="product-card__category">
+                                            {{ $categoryName }}
+                                        </p>
+
+                                        <h3 class="product-card__name">
+                                            {{ $product->nama }}
+                                        </h3>
+
+                                        <p class="product-card__price">
+                                            Rp {{ number_format($product->harga, 0, ',', '.') }}
+                                        </p>
+
+                                        <p class="category-product-stock">
+                                            Stok: {{ $product->stok }} unit
+                                        </p>
+                                    </div>
+                                </a>
+                            @endforeach
+                        </div>
+                    </section>
+                @endif
+            @empty
+                {{-- Daftar kategori ditentukan oleh controller. --}}
+            @endforelse
+
+            @if($productsByCategory->isEmpty())
+                <div class="category-empty">
+                    {{ $search !== ''
+                        ? 'Produk yang kamu cari tidak ditemukan.'
+                        : 'Belum ada produk aktif yang tersedia.' }}
+                </div>
+            @endif
+        </div>
     </main>
 </body>
 </html>

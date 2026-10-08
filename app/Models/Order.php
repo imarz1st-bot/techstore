@@ -21,6 +21,10 @@ class Order extends Model
         'metode_pembayaran',
         'status',
         'tanggal_pesanan',
+        'status_pembayaran',
+        'midtrans_order_id',
+        'snap_token',
+        'paid_at',
     ];
 
     protected $casts = [
@@ -28,6 +32,7 @@ class Order extends Model
         'ongkos_kirim' => 'decimal:2',
         'total' => 'decimal:2',
         'tanggal_pesanan' => 'datetime',
+        'paid_at' => 'datetime',
     ];
 
     public function user(): BelongsTo

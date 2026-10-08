@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Detail Produk - TechStore</title>
+    <title>{{ $product->nama }} - TechStore</title>
 
     <link rel="stylesheet" href="{{ asset('css/product-detail.css') }}">
 </head>
@@ -57,74 +57,76 @@
                 <figure class="product-gallery__figure">
                     <img
                         class="product-gallery__image"
-                        src="{{ asset('images/laptop.png') }}"
-                        alt="Apple 2020 Macbook Pro M1 warna silver"
+                        src="{{ $product->gambar
+                            ? asset('storage/' . $product->gambar)
+                            : asset('images/laptop.png') }}"
+                        alt="{{ $product->nama }}"
                     >
-                    <figcaption class="product-gallery__caption">APPLE MACBOOK PRO M1</figcaption>
-                </figure>
+                    <figcaption class="product-gallery__caption">
+                        {{ $product->nama }}
+                    </figcaption>
+            </figure>
             </section>
 
             <section class="product-information" aria-label="Informasi produk">
-                <p class="product-information__eyebrow">Laptop Apple</p>
+                <p class="product-information__eyebrow">
+                    {{ $product->kategori }}
+                </p>
+
                 <h1 class="product-information__title" id="product-title">
-                    APPLE 2020 Macbook Pro M1 8 GB / 512 GB
+                    {{ $product->nama }}
                 </h1>
 
-                <div class="product-rating" aria-label="Rating 4,5 dari 5 bintang, 2.372 ulasan">
-                    <span class="product-rating__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-                    <span class="product-rating__score">4,5 Bintang</span>
-                    <span class="product-rating__separator" aria-hidden="true">|</span>
-                    <a class="product-rating__reviews" href="#product-reviews">2.372 ulasan</a>
-                </div>
-
-                <p class="product-information__summary">
-                    MacBook Pro dengan chip Apple M1 menghadirkan performa cepat,
-                    baterai tahan lama, dan desain ringkas untuk bekerja maupun berkarya.
-                </p>
+                <p class="product-information__summary"
+                style="white-space: pre-line;">{{ $product->deskripsi ?: 'Belum ada deskripsi produk.' }}</p>
 
                 <dl class="product-specifications">
                     <div class="product-specifications__item">
-                        <dt class="product-specifications__label">Prosesor</dt>
-                        <dd class="product-specifications__value">Apple M1</dd>
+                        <dt class="product-specifications__label">Kategori</dt>
+                        <dd class="product-specifications__value">
+                            {{ $product->kategori }}
+                        </dd>
                     </div>
+
                     <div class="product-specifications__item">
-                        <dt class="product-specifications__label">Memori</dt>
-                        <dd class="product-specifications__value">8 GB unified memory</dd>
+                        <dt class="product-specifications__label">Stok</dt>
+                        <dd class="product-specifications__value">
+                            {{ $product->stok }} unit
+                        </dd>
                     </div>
+
                     <div class="product-specifications__item">
-                        <dt class="product-specifications__label">Penyimpanan</dt>
-                        <dd class="product-specifications__value">512 GB SSD</dd>
-                    </div>
-                    <div class="product-specifications__item">
-                        <dt class="product-specifications__label">Layar</dt>
-                        <dd class="product-specifications__value">13,3 inci Retina</dd>
+                        <dt class="product-specifications__label">Ketersediaan</dt>
+                        <dd class="product-specifications__value">
+                            {{ $product->stok > 0 ? 'Tersedia' : 'Stok habis' }}
+                        </dd>
                     </div>
                 </dl>
 
                 <div class="product-price">
                     <span class="product-price__label">Harga</span>
-                    <p class="product-price__amount">Rp 15.999.999</p>
+
+                    <p class="product-price__amount">
+                        Rp {{ number_format($product->harga, 0, ',', '.') }}
+                    </p>
                 </div>
 
                 <div class="product-actions" aria-label="Aksi produk">
-                    <a class="product-actions__buy" href="/order">Buy Now</a>
-                    <button class="product-actions__cart" type="button">Add to Cart</button>
-                    <button
-                        class="product-actions__bookmark"
-                        type="button"
-                        aria-label="Tambahkan produk ke favorit"
-                        aria-pressed="false"
-                    >
-                        <span aria-hidden="true">&#9734;</span>
-                    </button>
+                    @if($product->stok > 0)
+                        <a class="product-actions__buy"
+                        href="{{ route('order', ['product_id' => $product->id]) }}">
+                            Buy Now
+                        </a>
+                    @else
+                        <span class="product-actions__buy"
+                            aria-disabled="true"
+                            style="opacity: 0.5; cursor: not-allowed;">
+                            Stok Habis
+                        </span>
+                    @endif
                 </div>
             </section>
         </article>
-
-        <section class="product-reviews" id="product-reviews" aria-labelledby="product-reviews-title">
-            <h2 class="product-reviews__title" id="product-reviews-title">Ulasan pelanggan</h2>
-            <p class="product-reviews__summary">2.372 ulasan untuk produk ini</p>
-        </section>
     </main>
 </body>
 </html>

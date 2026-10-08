@@ -217,3 +217,35 @@
         white-space: nowrap;
     }
 }
+
+.shipping-settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.shipping-settings-form .settings-card {
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+}
+
+.shipping-settings-form .setting-field small {
+    display: block;
+    margin-top: 8px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.shipping-settings-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.shipping-settings-form .save-settings-button {
+    position: static;
+    float: none;
+    transform: none;
+    margin: 0;
+    width: auto;
+}

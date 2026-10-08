@@ -8,6 +8,9 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\UserDashboardController;
+use App\Http\Controllers\UserProductController;
+use App\Http\Controllers\UserOrderController;
 
 // =============================
 // LANDING PAGE
@@ -46,25 +49,49 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard-user');
-    })->name('dashboard');
+    Route::get('/dashboard', [UserDashboardController::class, 'index'])
+    ->name('dashboard');
+    
+    Route::get('/product/detail', [UserProductController::class, 'show'])
+    ->name('product.detail');
 
-    Route::get('/product/detail', function () {
-        return view('product-detail');
-    })->name('product.detail');
+    Route::get('/order', [UserOrderController::class, 'create'])
+    ->name('order');
 
-    Route::get('/order', function () {
-        return view('order');
-    })->name('order');
+    Route::post('/order', [UserOrderController::class, 'store'])
+    ->name('order.store');
+
+    Route::get('/my-orders', [UserOrderController::class, 'index'])
+    ->name('orders.index');
 
     // 👇 TAMBAHAN ROUTE HALAMAN INVOICE DI SINI
-    Route::get('/invoice', function () {
-        return view('invoice');
-    })->name('invoice');
+    Route::get('/invoice/{order}', [UserOrderController::class, 'invoice'])
+    ->whereNumber('order')
+    ->name('invoice');
 
     Route::post('/logout', [AuthController::class, 'logout'])
         ->name('logout');
+
+    Route::patch('/my-orders/{order}/cancel', [
+        UserOrderController::class,
+        'cancel',
+    ])
+    ->whereNumber('order')
+    ->name('orders.cancel');
+
+    Route::post('/my-orders/{order}/pay', [
+    UserOrderController::class,
+    'pay',
+    ])
+    ->whereNumber('order')
+    ->name('orders.pay');
+
+    Route::post('/my-orders/{order}/check-payment', [
+    UserOrderController::class,
+    'checkPayment',
+    ])
+    ->whereNumber('order')
+    ->name('orders.check-payment');
 
 });
 
@@ -123,4 +150,14 @@ Route::prefix('admin')
 
         Route::put('/settings', [SettingController::class, 'update'])
             ->name('settings.update');
+
+        Route::put('/settings/account', [
+        SettingController::class,
+        'updateAccount',
+        ])->name('settings.account.update');
+
+        Route::put('/settings/shipping', [
+        SettingController::class,
+        'updateShipping',
+        ])->name('settings.shipping.update');
     });

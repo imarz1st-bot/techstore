@@ -128,28 +128,17 @@
                         <div class="form-group">
                             <label for="kategori">Kategori <b>*</b></label>
 
-                            <select id="kategori" name="kategori">
+                            <select id="kategori" name="kategori" required>
                                 <option value="">Pilih kategori</option>
 
-                                <option value="Laptop"
-                                    @selected(old('kategori') === 'Laptop')>
-                                    Laptop
-                                </option>
-
-                                <option value="Gaming"
-                                    @selected(old('kategori') === 'Gaming')>
-                                    Gaming
-                                </option>
-
-                                <option value="MacBook"
-                                    @selected(old('kategori') === 'MacBook')>
-                                    MacBook
-                                </option>
-
-                                <option value="Aksesoris"
-                                    @selected(old('kategori') === 'Aksesoris')>
-                                    Aksesoris
-                                </option>
+                                @foreach(['laptop', 'mouse', 'charger', 'monitor', 'aksesoris'] as $kategori)
+                                    <option
+                                        value="{{ $kategori }}"
+                                        @selected(old('kategori') === $kategori)
+                                    >
+                                        {{ ucfirst($kategori) }}
+                                    </option>
+                                @endforeach
                             </select>
 
                             @error('kategori')
